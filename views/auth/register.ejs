@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Register | Orbit HCM</title>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/navbar') %>
+    <main class="container narrow">
+      <h1>Create an account</h1>
+      <% if (error) { %>
+        <div class="alert"><%= error %></div>
+      <% } %>
+      <form action="/auth/register" method="POST" class="form-grid">
+        <div class="form-row">
+          <label>Full Name
+            <input type="text" name="name" value="<%= form.name || '' %>">
+          </label>
+
+          <label>Username
+            <input type="text" name="username" value="<%= form.username || '' %>" required>
+          </label>
+
+          <label>Password
+            <input type="password" name="password" required>
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn primary" type="submit">Register</button>
+          <a class="btn ghost" href="/">Cancel</a>
+        </div>
+      </form>
+    </main>
+    <%- include('../partials/footer') %>
+  </body>
+</html>

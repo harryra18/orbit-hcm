@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <title>New Hire | Orbit HCM</title>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/navbar') %>
+    <main class="container narrow">
+      <h1>New Hire</h1>
+      <% if (error) { %>
+        <div class="alert"><%= error %></div>
+      <% } %>
+
+      <form action="/employees" method="POST" class="form-grid">
+        <div class="form-row">
+          <label>Hire Date
+            <input type="date" name="hireDate" value="<%= form.hireDate || '' %>">
+          </label>
+
+          <label>Status
+            <select name="status">
+              <option value="Active" <%= form.status === 'Active' ? 'selected' : '' %>>Active</option>
+              <option value="PreStart" <%= (!form.status || form.status === 'PreStart') ? 'selected' : '' %>>PreStart</option>
+            </select>
+          </label>
+
+          <label>Employee Name
+            <input type="text" name="name" required value="<%= form.name || '' %>">
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>Employee Number
+            <input type="text" name="employeeNumber" required value="<%= form.employeeNumber || '' %>">
+          </label>
+
+          <label>Pay Class
+            <select name="payClass">
+              <option value="Full Time">Full Time</option>
+              <option value="Part Time">Part Time</option>
+              <option value="Contractor">Contractor</option>
+              <option value="Intern">Intern</option>
+            </select>
+          </label>
+
+          <label>Pay Type
+            <select name="payType">
+              <option value="Salary">Salary</option>
+              <option value="Hourly">Hourly</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>Department
+            <select name="department">
+              <option>Human Resources</option>
+              <option>Finance</option>
+              <option>Information Technology</option>
+              <option>Sales</option>
+              <option>Marketing</option>
+              <option>Management</option>
+            </select>
+          </label>
+
+          <label>Job Title
+            <input type="text" name="jobTitle" value="<%= form.jobTitle || '' %>">
+          </label>
+
+          <label>Image URL
+            <input type="url" name="imageUrl" placeholder="https://..." value="<%= form.imageUrl || '' %>">
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn primary" type="submit">Save</button>
+          <a class="btn ghost" href="/employees">Cancel</a>
+        </div>
+      </form>
+    </main>
+    <%- include('../partials/footer') %>
+  </body>
+</html>

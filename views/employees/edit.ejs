@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Edit <%= employee.name %> | Orbit HCM</title>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/navbar') %>
+    <main class="container narrow">
+      <h1>Edit Employee</h1>
+      <% if (error) { %>
+        <div class="alert"><%= error %></div>
+      <% } %>
+
+      <form action="/employees/<%= employee._id %>?_method=PUT" method="POST" class="form-grid">
+        <div class="form-row">
+          <label>Hire Date
+            <input type="date" name="hireDate" value="<%= employee.hireDate ? new Date(employee.hireDate).toISOString().slice(0,10) : '' %>">
+          </label>
+
+          <label>Status
+            <select name="status">
+              <option value="Active" <%= employee.status === 'Active' ? 'selected' : '' %>>Active</option>
+              <option value="PreStart" <%= employee.status === 'PreStart' ? 'selected' : '' %>>PreStart</option>
+              <option value="Terminated" <%= employee.status === 'Terminated' ? 'selected' : '' %>>Terminated</option>
+            </select>
+          </label>
+
+          <label>Employee Name
+            <input type="text" name="name" required value="<%= employee.name %>">
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>Employee Number
+            <input type="text" name="employeeNumber" required value="<%= employee.employeeNumber %>">
+          </label>
+
+          <label>Pay Class
+            <select name="payClass">
+              <option value="Full Time" <%= employee.payClass === 'Full Time' ? 'selected' : '' %>>Full Time</option>
+              <option value="Part Time" <%= employee.payClass === 'Part Time' ? 'selected' : '' %>>Part Time</option>
+              <option value="Contractor" <%= employee.payClass === 'Contractor' ? 'selected' : '' %>>Contractor</option>
+              <option value="Intern" <%= employee.payClass === 'Intern' ? 'selected' : '' %>>Intern</option>
+            </select>
+          </label>
+
+          <label>Pay Type
+            <select name="payType">
+              <option value="Salary" <%= employee.payType === 'Salary' ? 'selected' : '' %>>Salary</option>
+              <option value="Hourly" <%= employee.payType === 'Hourly' ? 'selected' : '' %>>Hourly</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>Department
+            <select name="department">
+              <option value="Human Resources" <%= employee.department === 'Human Resources' ? 'selected' : '' %>>Human Resources</option>
+              <option value="Finance" <%= employee.department === 'Finance' ? 'selected' : '' %>>Finance</option>
+              <option value="Information Technology" <%= employee.department === 'Information Technology' ? 'selected' : '' %>>Information Technology</option>
+              <option value="Sales" <%= employee.department === 'Sales' ? 'selected' : '' %>>Sales</option>
+              <option value="Marketing" <%= employee.department === 'Marketing' ? 'selected' : '' %>>Marketing</option>
+              <option value="Management" <%= employee.department === 'Management' ? 'selected' : '' %>>Management</option>
+            </select>
+          </label>
+
+          <label>Job Title
+            <input type="text" name="jobTitle" value="<%= employee.jobTitle || '' %>">
+          </label>
+
+          <label>Image URL
+            <input type="url" name="imageUrl" placeholder="https://..." value="<%= employee.imageUrl || '' %>">
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn primary" type="submit">Save</button>
+          <a class="btn ghost" href="/employees/<%= employee._id %>">Cancel</a>
+        </div>
+      </form>
+    </main>
+    <%- include('../partials/footer') %>
+  </body>
+</html>

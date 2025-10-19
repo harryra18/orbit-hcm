@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= employee.name %> | Orbit HCM</title>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/navbar') %>
+
+    <main class="container profile">
+      <div class="profile-header">
+        <div class="avatar-wrap">
+          <img src="<%= employee.imageUrl || '/images/default-avatar.png' %>" alt="Photo of <%= employee.name %>" class="avatar">
+        </div>
+
+        <div class="profile-title">
+          <h2><%= employee.name %> - <%= employee.employeeNumber %></h2>
+          <p class="job-title"><%= employee.jobTitle || '' %></p>
+          <div class="top-actions">
+            <a class="btn small" href="/employees/<%= employee._id %>/edit">Edit</a>
+            <a class="btn danger" href="/employees/<%= employee._id %>/terminate">Terminate Employee</a>
+
+            <form action="/employees/<%= employee._id %>?_method=DELETE" method="POST" style="display:inline">
+              <button class="btn ghost" type="submit" onclick="return confirm('Delete this employee?')">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <section class="profile-grid" aria-labelledby="employee-details">
+        <div>
+          <strong>Hire Date</strong>
+          <div><%= employee.hireDate ? new Date(employee.hireDate).toLocaleDateString() : '&mdash;' %></div>
+        </div>
+
+        <div>
+          <strong>Status</strong>
+          <div><span class="status <%= (employee.status || '').toLowerCase() %>"><%= employee.status || '&mdash;' %></span></div>
+        </div>
+
+        <div>
+          <strong>Pay Type</strong>
+          <div><%= employee.payType || '&mdash;' %></div>
+        </div>
+
+        <div>
+          <strong>Pay Class</strong>
+          <div><%= employee.payClass || '&mdash;' %></div>
+        </div>
+
+        <div>
+          <strong>Department</strong>
+          <div><%= employee.department || '&mdash;' %></div>
+        </div>
+
+        <div>
+          <strong>Employee Number</strong>
+          <div><%= employee.employeeNumber %></div>
+        </div>
+
+        <div>
+          <strong>Termination Reason</strong>
+          <div><%= employee.terminationReason || '&mdash;' %></div>
+        </div>
+
+        <div>
+          <strong>Termination Date</strong>
+          <div><%= employee.terminationDate ? new Date(employee.terminationDate).toLocaleDateString() : '&mdash;' %></div>
+        </div>
+      </section>
+    </main>
+
+    <%- include('../partials/footer') %>
+  </body>
+</html>

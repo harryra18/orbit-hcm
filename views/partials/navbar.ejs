@@ -1,0 +1,17 @@
+<header class="nav">
+  <div class="nav-left">
+    <a href="/employees" class="brand">Orbit HCM</a>
+  </div>
+  <div class="nav-right">
+    <% if (currentUser) { %>
+      <span class="greeting">Hi, <%= currentUser.name || currentUser.username %></span>
+      <a href="/employees" class="nav-link">Employees</a>
+      <form action="/auth/logout" method="POST" style="display:inline">
+        <button class="btn small" type="submit">Logout</button>
+      </form>
+    <% } else { %>
+      <a href="/auth/login" class="btn">Login</a>
+      <a href="/auth/register" class="btn ghost">Register</a>
+    <% } %>
+  </div>
+</header>

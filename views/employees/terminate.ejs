@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Terminate <%= employee.name %> | Orbit HCM</title>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/navbar') %>
+    <main class="container narrow">
+      <h1>Terminate Employee</h1>
+      <% if (error) { %>
+        <div class="alert"><%= error %></div>
+      <% } %>
+
+      <form action="/employees/<%= employee._id %>/terminate?_method=PUT" method="POST" class="form-grid">
+        <div class="form-row">
+          <label>Employee Name
+            <input type="text" value="<%= employee.name %>" readonly>
+          </label>
+
+          <label>Employee Number
+            <input type="text" value="<%= employee.employeeNumber %>" readonly>
+          </label>
+
+          <label>Department
+            <input type="text" value="<%= employee.department || '' %>" readonly>
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>Termination Reason
+            <select name="terminationReason" required>
+              <option>Unsatisfactory Performance</option>
+              <option>Work Load</option>
+              <option>Culture</option>
+              <option>Misconduct</option>
+              <option>Business Direction</option>
+              <option>Retirement</option>
+              <option>Personal</option>
+              <option>Medical</option>
+              <option>Divestiture</option>
+            </select>
+          </label>
+
+          <label>Termination Date
+            <input type="date" name="terminationDate" required>
+          </label>
+
+          <label>&nbsp;</label>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn danger" type="submit">Save</button>
+          <a class="btn ghost" href="/employees/<%= employee._id %>">Cancel</a>
+        </div>
+      </form>
+    </main>
+    <%- include('../partials/footer') %>
+  </body>
+</html>
+
+

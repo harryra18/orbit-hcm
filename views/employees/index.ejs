@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Employees | Orbit HCM</title>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/navbar') %>
+
+    <main class="container">
+      <div class="home-header">
+        <h1>Employees</h1>
+        <a href="/employees/new" class="btn primary">Create Employee</a>
+      </div>
+
+      <section class="grid-table" aria-live="polite">
+        <div class="row header">
+          <div>Status</div>
+          <div>Name</div>
+          <div>Employee #</div>
+          <div>Pay Type</div>
+          <div>Pay Class</div>
+          <div>Department</div>
+          <div>Job Title</div>
+        </div>
+
+        <% if (employees.length === 0) { %>
+          <div class="row">
+            <div colspan="7">No employees yet.</div>
+          </div>
+        <% } %>
+
+        <% employees.forEach(emp => { %>
+          <div class="row">
+            <div>
+              <span class="status <%= (emp.status || 'PreStart').toLowerCase() %>"><%= emp.status || 'PreStart' %></span>
+            </div>
+
+            <div>
+              <a class="employee-link" href="/employees/<%= emp._id %>"><%= emp.name %></a>
+            </div>
+
+            <div><%= emp.employeeNumber %></div>
+            <div><%= emp.payType || '&mdash;' %></div>
+            <div><%= emp.payClass || '&mdash;' %></div>
+            <div><%= emp.department || '&mdash;' %></div>
+            <div><%= emp.jobTitle || '&mdash;' %></div>
+          </div>
+        <% }) %>
+      </section>
+    </main>
+
+    <%- include('../partials/footer') %>
+  </body>
+</html>
+
+
+
+
+
+
