@@ -27,7 +27,3 @@ Built using **Node.js**, **Express**, **MongoDB**, and **EJS templates**, it sup
 - bcrypt (for password hashing)
 - CSS Flexbox/Grid for layout
 - Method-Override (for PUT/DELETE routes)
-
----
-
-## 📦 Installation
